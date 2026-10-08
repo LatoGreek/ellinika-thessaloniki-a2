@@ -1,0 +1,448 @@
+
+<!DOCTYPE html>
+<html lang="el">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Μια απρόβλεπτη μέρα στη Θεσσαλονίκη</title>
+<style>
+:root{--blue:#185b82;--dark:#243746;--bg:#f2f5f8}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--dark);font:18px/1.6 Arial,sans-serif}
+header{padding:30px 22px;background:#16415d;color:white;text-align:center}
+header h1{max-width:850px;margin:8px auto;font-size:clamp(25px,4vw,38px);line-height:1.2}
+header p{color:#dbe9f2}
+main{max-width:950px;margin:auto;padding:22px}
+section{display:none;background:white;padding:clamp(20px,4vw,36px);border-radius:17px;box-shadow:0 3px 20px #18344a12}
+section.active{display:block}
+h2{color:var(--blue);font-size:28px;line-height:1.3}
+h3{font-size:21px}
+.small{font-size:14px;color:#617789}
+.photo{width:100%;height:270px;object-fit:cover;border-radius:12px;background:#e1e9ef}
+.story{background:#edf5fa;border-radius:12px;padding:18px;margin:17px 0}
+.dialog{padding:13px;border-left:4px solid #2584b5;background:#f3f8fb;margin:15px 0}
+.task{border:1px solid #d0dfe9;padding:18px;border-radius:12px;margin:20px 0}
+button{font:inherit;border:0;border-radius:9px;background:var(--blue);color:white;padding:12px 18px;cursor:pointer}
+button.secondary{background:#e5eef5;color:#174964}
+button:disabled{opacity:.35}
+button:focus-visible{outline:3px solid #e5a444;outline-offset:2px}
+.choices{display:grid;grid-template-columns:1fr 1fr;gap:15px;margin:20px 0}
+.choice{background:white;color:var(--dark);border:2px solid #dae6ee;border-radius:13px;padding:8px;text-align:left}
+.choice.selected{border:3px solid #1882bc;background:#eaf6fd}
+.choice img{width:100%;height:165px;object-fit:cover;border-radius:8px;display:block}
+.choice span{display:block;padding:10px 5px;font-weight:bold}
+.choice:hover{background:#eef8fe}
+.teacher{display:none;background:#fff5e5;border-left:4px solid #d69a38;border-radius:8px;padding:16px;margin:18px 0}
+body.teacher-on .teacher{display:block}
+.help{display:none;background:#eaf7ee;padding:16px;border-radius:9px;margin:12px 0}
+textarea,.answer{width:100%;font:inherit;padding:11px;border:1px solid #b6c9d7;border-radius:8px}
+textarea{min-height:115px}
+label{display:block;margin:9px 0}
+.nav{display:flex;justify-content:space-between;gap:10px;margin:24px 0}
+#progress{height:7px;background:#dce8f0;border-radius:12px;overflow:hidden;margin:18px 0}
+#bar{height:100%;width:16%;background:#2584b5;transition:width .2s}
+#sourceNote{font-size:12px;color:#687b89}
+#sourceNote a{color:inherit}
+footer{text-align:center;font-size:12px;color:#687b89;padding:22px}
+@media(max-width:550px){
+.choices{grid-template-columns:1fr}
+.choice img{height:195px}
+}
+@media print{
+section{display:block!important;box-shadow:none;break-after:page}
+header,.nav,#toolbar,#progress,button,.teacher{display:none!important}
+body{background:white}
+}
+</style>
+</head>
+<body>
+
+<header>
+<p>ΕΛΛΗΝΙΚΑ Α2 · ΔΙΑΔΡΑΣΤΙΚΗ ΙΣΤΟΡΙΑ</p>
+<h1>Ούτε στη Θεσσαλονίκη δεν με αφήνουν να ησυχάσω!</h1>
+<p>Φίλοι, μουσική, απρόοπτα και λίγη... δουλειά!</p>
+</header>
+
+<main>
+<div id="toolbar">
+<button class="secondary" onclick="toggleTeacher()">🎓 Οδηγίες καθηγήτριας</button>
+<button class="secondary" onclick="window.print()">Εκτύπωση</button>
+</div>
+<div id="progress"><div id="bar"></div></div>
+<p id="counter" class="small"></p>
+
+<section id="scene0" class="active">
+<img class="photo" data-photo="water" alt="Η παραλία της Θεσσαλονίκης">
+<h2>1. Επιτέλους στη Θεσσαλονίκη!</h2>
+<p class="small">10 λεπτά · Αόριστος και προσωπικές εμπειρίες</p>
+<div class="story">
+Μετά από πολλές εβδομάδες δουλειάς και αρκετά επαγγελματικά ταξίδια, βρίσκεσαι ξανά στη Θεσσαλονίκη.
+
+Είναι Σάββατο πρωί. Πίνεις καφέ με την κοπέλα σου.
+</div>
+<div class="dialog">
+<b>Μαρία:</b> Επιτέλους, έχουμε λίγο χρόνο μαζί! Πώς σου φαίνεται που είσαι πάλι εδώ; Πώς πήγε το τελευταίο σου ταξίδι;
+</div>
+<div class="task">
+<h3>💬 Ας μιλήσουμε!</h3>
+<p>Πότε ήρθες τελευταία φορά στην Ελλάδα;</p>
+<p>Πού πήγες και ποιους φίλους είδες;</p>
+<p>Τι έκανες μαζί τους;</p>
+<p>Ποια ήταν η καλύτερη στιγμή του ταξιδιού;</p>
+<p>Έφαγες κάτι που σου είχε λείψει;</p>
+</div>
+<div class="teacher">
+<b>Για την καθηγήτρια:</b>
+Άφησέ τον να μιλήσει για την πραγματική πρόσφατη επίσκεψή του. Παρατήρησε κυρίως τα ρήματα πήγα, ήρθα, είδα, έφαγα, ήπια και πέρασα.
+</div>
+</section>
+
+<section id="scene1">
+<h2>2. Τι θα κάνουμε απόψε;</h2>
+<p class="small">10 λεπτά · Μέλλοντας, υποτακτική, προτιμήσεις</p>
+<div class="dialog">
+<b>Μαρία:</b> Ο Γιώργος και η Ελένη θέλουν να βγούμε μαζί. Δεν έχουμε όμως αποφασίσει τι θα κάνουμε. Εσύ τι προτείνεις;
+</div>
+
+<h3>Διάλεξε το πρόγραμμα της παρέας!</h3>
+
+<div class="choices">
+<button class="choice" data-option="food" onclick="choose('food')">
+<img data-photo="food" alt="Λαδάδικα">
+<span>🍽️ Α. Φαγητό στα Λαδάδικα</span>
+</button>
+
+<button class="choice" data-option="concert" onclick="choose('concert')">
+<img data-photo="concert" alt="Μια ζωντανή συναυλία">
+<span>🎵 Β. Μια συναυλία</span>
+</button>
+
+<button class="choice" data-option="water" onclick="choose('water')">
+<img data-photo="water" alt="Η παραλία της Θεσσαλονίκης">
+<span>🍹 Γ. Ποτό δίπλα στη θάλασσα</span>
+</button>
+
+<button class="choice" data-option="trip" onclick="choose('trip')">
+<img data-photo="trip" alt="Παλαιός Παντελεήμονας">
+<span>🚗 Δ. Μια μικρή εκδρομή</span>
+</button>
+</div>
+
+<div class="task">
+<h3>🎯 Η αποστολή σου</h3>
+<p>Ποια επιλογή προτιμάς και γιατί;</p>
+<p>Τι ώρα θα ξεκινήσετε; Πώς θα πάτε; Τι θα κάνετε εκεί;</p>
+<p>Προσπάθησε να πείσεις τους φίλους σου!</p>
+<div class="dialog">
+<b>Μαρία:</b> Ωραία ιδέα! Αλλά την προηγούμενη φορά κάναμε κάτι παρόμοιο. Δεν θέλεις να δοκιμάσουμε κάτι διαφορετικό;
+</div>
+</div>
+<button class="secondary" onclick="toggleHelp('help1')">💡 Χρειάζεσαι βοήθεια;</button>
+<div class="help" id="help1">
+Προτείνω να…<br>
+Μπορούμε να…<br>
+Θα πάμε…<br>
+Την προηγούμενη φορά πήγαμε…<br>
+Προτιμώ… γιατί…
+</div>
+<div class="teacher">
+<b>Για την καθηγήτρια:</b>
+Άφησέ τον να αιτιολογήσει την επιλογή του. Διαφώνησε ελαφρώς και συνέχισε με προσωπικές ερωτήσεις: «Έχεις ξαναπάει εκεί;», «Με ποιους πήγες;», «Τι θα ήθελες να κάνεις αυτή τη φορά;».
+</div>
+</section>
+
+<section id="scene2">
+<h2>3. Το e-mail που άλλαξε τα σχέδια!</h2>
+<p class="small">15 λεπτά · Εργασία και επίλυση προβλήματος</p>
+<p>Έχετε σχεδόν κανονίσει τα πάντα. Ξαφνικά χτυπάει το κινητό σου!</p>
+<div class="task">
+<p>📩 <b>Από: Νίκος — Συνάδελφος</b></p>
+<p><b>Θέμα: Επείγουσα συνάντηση</b></p>
+<hr>
+<p>Γεια σου!</p>
+<p>Συγγνώμη που σου γράφω το Σάββατο, αλλά έχουμε ένα σοβαρό πρόβλημα με έναν πελάτη.</p>
+<p>Χθες μιλήσαμε μαζί του και όλα ήταν καλά, αλλά σήμερα μας τηλεφώνησε ξανά.</p>
+<p>Πρέπει να κάνουμε μια συνάντηση στις 7 το απόγευμα. Θα είσαι διαθέσιμος;</p>
+<p>Σε παρακαλώ, απάντησέ μου σύντομα.</p>
+<p>Νίκος</p>
+</div>
+
+<div class="dialog">
+<b>Μαρία:</b> Τι έγινε πάλι με τη δουλειά; Δεν είπες ότι σήμερα δεν θα δουλέψεις;
+</div>
+
+<div class="task">
+<h3>Αποστολή Α</h3>
+<p>Εξήγησε στη Μαρία τι έγινε και τι πρέπει να κάνεις τώρα.</p>
+</div>
+
+<div class="task">
+<h3>📧 Αποστολή Β — Απάντησε στο e-mail</h3>
+<p>Τι αποφασίζεις;</p>
+<label><input type="radio" name="meeting"> Θα κάνω τη συνάντηση στις 7.</label>
+<label><input type="radio" name="meeting" checked> Θα προτείνω άλλη ώρα.</label>
+<label><input type="radio" name="meeting"> Θα προτείνω τη Δευτέρα.</label>
+<p>Γράψε 3–5 προτάσεις στα ελληνικά.</p>
+<textarea placeholder="Γεια σου Νίκο, ..."></textarea>
+</div>
+
+<button onclick="document.getElementById('newmail').hidden=false">📨 Άνοιξε το νέο μήνυμα</button>
+
+<div id="newmail" hidden class="story">
+<b>Νίκος:</b> Τελικά, ο πελάτης μπορεί να μιλήσει αύριο. Δεν χρειάζεται να κάνουμε τη συνάντηση σήμερα. Συγγνώμη για την αναστάτωση!
+<hr>
+<b>Μαρία:</b> Ευτυχώς! Λοιπόν, τι θα κάνουμε τώρα;
+<p><b>Αποστολή Γ:</b> Πες στη Μαρία τι άλλαξε και αν θα συνεχίσετε με το αρχικό σχέδιο.</p>
+</div>
+
+<div class="teacher">
+<b>Για την καθηγήτρια:</b>
+Πρώτα προφορική απάντηση και μετά γραπτή. Στόχοι: μου έστειλε, μου είπε, μιλήσαμε, πρέπει να, θα μιλήσουμε.
+</div>
+</section>
+
+<section id="scene3">
+<h2>4. Κάτι πήγε στραβά!</h2>
+<p class="small">15 λεπτά · Παράπονο και παιχνίδι ρόλων</p>
+<p>Τελικά η δουλειά δεν σας χάλασε το πρόγραμμα. Αλλά συμβαίνει κάτι άλλο!</p>
+<img id="problemPhoto" class="photo" alt="Η δραστηριότητα που επιλέξατε">
+<div class="story">
+<h3 id="problemTitle"></h3>
+<p id="problemText"></p>
+</div>
+<div class="task">
+<h3>🎭 Παιχνίδι ρόλων</h3>
+<p>Εσύ είσαι ο πελάτης και η καθηγήτρια παίζει τον υπάλληλο.</p>
+<p>Εξήγησε τι συνέβη και ζήτησε μια λύση.</p>
+<button class="secondary" onclick="toggleHelp('employeeBox')">Τι απαντά ο υπάλληλος;</button>
+<div id="employeeBox" class="help">
+<p id="employeeText"></p>
+</div>
+<p><b>Τώρα τι θα κάνεις;</b> Θα δεχτείς την πρότασή του ή θα ζητήσεις κάτι διαφορετικό;</p>
+</div>
+<button class="secondary" onclick="toggleHelp('hintBox')">💡 Μικρή γλωσσική βοήθεια</button>
+<div id="hintBox" class="help"><p id="hintText"></p></div>
+<div class="teacher">
+<b>Για την καθηγήτρια:</b>
+Μην αποδεχτείς αμέσως το πρώτο αίτημα. Πρότεινε μια εναλλακτική λύση και άφησέ τον να αποφασίσει.
+<p><button class="secondary" onclick="choose('food')">Δοκιμή: λάθος παραγγελία</button></p>
+</div>
+</section>
+
+<section id="scene4">
+<img class="photo" data-photo="water" alt="Η Θεσσαλονίκη">
+<h2>5. Τελικά, άξιζε το Σαββατοκύριακο;</h2>
+<p class="small">10 λεπτά · Ελεύθερη συζήτηση</p>
+<p>Την επόμενη μέρα πίνεις καφέ με τη Μαρία.</p>
+<div class="dialog">
+<b>Μαρία:</b> Τι μέρα κι αυτή! Πρώτα η δουλειά και μετά όλα τα υπόλοιπα! Εσύ πώς πέρασες τελικά;
+</div>
+<div class="task">
+<h3>💬 Πάμε λίγο πιο προσωπικά!</h3>
+<p>Όταν ταξιδεύεις για δουλειά, έχεις χρόνο να γνωρίσεις την πόλη;</p>
+<p>Ποιο ήταν το καλύτερο επαγγελματικό ταξίδι που έκανες;</p>
+<p>Πόσο συχνά πηγαίνεις σε συναυλίες; Ποια συγκροτήματα έχεις δει στην Ελλάδα;</p>
+<p>Ποιο μέρος της Θεσσαλονίκης θα πρότεινες σε έναν φίλο σου;</p>
+<p>Τι θα ήθελες να κάνεις στην επόμενη επίσκεψή σου;</p>
+</div>
+<div class="dialog">
+<b>Μαρία:</b> Την επόμενη φορά θέλω ένα ολόκληρο Σαββατοκύριακο χωρίς δουλειά!
+</div>
+<div class="task">
+<b>Τελική αποστολή:</b>
+Οργάνωσε ένα πρόγραμμα για δύο ημέρες. Τι θα κάνετε το Σάββατο και τι την Κυριακή;
+</div>
+<div class="teacher">
+<b>Για την καθηγήτρια:</b>
+Εδώ προτεραιότητα έχει η αυθόρμητη συζήτηση. Διάλεξε λίγες ερωτήσεις που συνδέονται με τις πραγματικές εμπειρίες του μαθητή.
+</div>
+</section>
+
+<section id="scene5">
+<h2>6. Μικρή επανάληψη στο σπίτι</h2>
+<p class="small">10–15 λεπτά · Αυτοαξιολόγηση</p>
+<p>Συμπλήρωσε τις προτάσεις με τον σωστό τύπο.</p>
+<div id="quiz"></div>
+<button onclick="checkQuiz()">Έλεγχος απαντήσεων</button>
+<button class="secondary" onclick="resetQuiz()">Προσπάθησε ξανά</button>
+<h3 id="result"></h3>
+<div class="task">
+<h3>Τελική πρόκληση</h3>
+<p>Γράψε 4–5 προτάσεις για την τελευταία φορά που ήρθες στην Ελλάδα και για όσα θα ήθελες να κάνεις την επόμενη φορά.</p>
+<textarea placeholder="Την τελευταία φορά πήγα..."></textarea>
+</div>
+</section>
+
+<div class="nav">
+<button class="secondary" id="prev" onclick="move(-1)">← Προηγούμενη</button>
+<button id="next" onclick="move(1)">Επόμενη →</button>
+</div>
+<p id="sourceNote">
+Φωτογραφίες από το
+<a href="https://commons.wikimedia.org/" target="_blank" rel="noopener">Wikimedia Commons</a>.
+Οι φωτογραφίες χρειάζονται σύνδεση στο διαδίκτυο.
+</p>
+</main>
+<footer>Ελληνικά Α2 · Πρωτότυπο εκπαιδευτικό υλικό</footer>
+
+<script>
+let page=0;
+let outing="concert";
+
+const photoNames={
+food:"Street in Ladidaka neighbourhood of Thessaloniki July 2006.jpg",
+concert:"Music band performs on stage during a live concert.jpg",
+water:"Waterfront of Thessaloniki.jpg",
+trip:"Palios Pantelimonas, Greece.jpg"
+};
+
+function photoURL(key){
+ return "https://commons.wikimedia.org/wiki/Special:FilePath/"
+ +encodeURIComponent(photoNames[key])+"?width=900";
+}
+
+document.querySelectorAll("[data-photo]").forEach(img=>{
+ img.src=photoURL(img.dataset.photo);
+ img.onerror=function(){
+   this.style.display="none";
+ };
+});
+
+const stories={
+concert:{
+title:"Τα εισιτήρια είναι για άλλη μέρα!",
+problem:"Φτάσατε στη συναυλία, αλλά στην είσοδο ανακαλύπτεις ότι τα εισιτήρια είναι για αύριο. Εσύ είσαι σίγουρος ότι διάλεξες τη σωστή ημερομηνία.",
+employee:"Λυπάμαι, αλλά αυτά τα εισιτήρια είναι για αύριο. Σήμερα δεν έχουμε άλλες θέσεις.",
+hint:"Κλείσαμε τα εισιτήρια την προηγούμενη εβδομάδα. Νομίζω ότι έγινε λάθος. Μπορείτε να μας βοηθήσετε;"
+},
+food:{
+title:"Δεν παράγγειλα αυτό!",
+problem:"Πήγατε σε μια ταβέρνα. Παράγγειλες γεμιστά, αλλά ο σερβιτόρος σού έφερε μουσακά. Οι φίλοι σου έχουν αρχίσει να τρώνε.",
+employee:"Συγγνώμη, έγινε λάθος. Τα γεμιστά θα είναι έτοιμα σε είκοσι λεπτά. Θέλετε να περιμένετε;",
+hint:"Συγγνώμη, αλλά παράγγειλα γεμιστά, όχι μουσακά. Μπορείτε να μου φέρετε αυτό που ζήτησα;"
+},
+water:{
+title:"Ο λογαριασμός δεν είναι σωστός!",
+problem:"Καθίσατε σε ένα μπαρ δίπλα στη θάλασσα. Παραγγείλατε τέσσερα ποτά, αλλά στον λογαριασμό βλέπεις έξι. Πρέπει να μιλήσεις με τον σερβιτόρο.",
+employee:"Συγγνώμη, νόμιζα ότι παραγγείλατε έξι ποτά. Θα κοιτάξω ξανά τον λογαριασμό.",
+hint:"Συγγνώμη, νομίζω ότι έγινε λάθος. Παραγγείλαμε τέσσερα ποτά, όχι έξι. Μπορείτε να ελέγξετε τον λογαριασμό;"
+},
+trip:{
+title:"Πού είναι η κράτησή μας;",
+problem:"Φτάνετε στο ξενοδοχείο για την εκδρομή σας, αλλά η υπάλληλος δεν βρίσκει την κράτησή σας. Εσείς έχετε ήδη πληρώσει.",
+employee:"Δεν βρίσκω την κράτησή σας. Μήπως κάνατε κράτηση για άλλη ημερομηνία;",
+hint:"Κάναμε κράτηση την προηγούμενη εβδομάδα και πληρώσαμε. Μπορείτε να κοιτάξετε ξανά;"
+}
+};
+
+function choose(type){
+ outing=type;
+ const d=stories[type];
+ document.getElementById("problemTitle").textContent=d.title;
+ document.getElementById("problemText").textContent=d.problem;
+ document.getElementById("employeeText").textContent=d.employee;
+ document.getElementById("hintText").textContent=d.hint;
+ const img=document.getElementById("problemPhoto");
+ img.src=photoURL(type);
+ img.style.display="block";
+ img.onerror=()=>img.style.display="none";
+ document.querySelectorAll(".choice").forEach(b=>{
+   b.classList.toggle("selected",b.dataset.option===type);
+ });
+ document.getElementById("employeeBox").style.display="none";
+ document.getElementById("hintBox").style.display="none";
+}
+
+function showPage(n){
+ page=Math.max(0,Math.min(5,n));
+ document.querySelectorAll("main section").forEach((s,i)=>{
+   s.classList.toggle("active",i===page);
+ });
+ document.getElementById("counter").textContent=
+ "Σκηνή "+(page+1)+" από 6";
+ document.getElementById("bar").style.width=
+ ((page+1)/6*100)+"%";
+ document.getElementById("prev").disabled=(page===0);
+ document.getElementById("next").textContent=
+ page===5?"Αρχή ↺":"Επόμενη →";
+ window.scrollTo({top:0,behavior:"smooth"});
+}
+
+function move(step){
+ if(page===5&&step===1)showPage(0);
+ else showPage(page+step);
+}
+
+function toggleTeacher(){
+ document.body.classList.toggle("teacher-on");
+}
+
+function toggleHelp(id){
+ const e=document.getElementById(id);
+ e.style.display=e.style.display==="block"?"none":"block";
+}
+
+const questions=[
+["Χθες ______ (πηγαίνω) με τη Μαρία στο κέντρο.","πήγα"],
+["Η Ελένη ______ (έρχομαι) την Παρασκευή.","ήρθε"],
+["Αύριο εμείς ______ (βλέπω) τους φίλους μας.","θα δούμε"],
+["Θέλουμε να ______ (τρώω) όλοι μαζί.","φάμε"],
+["Παραγγείλαμε δύο ______ (σαλάτα).","σαλάτες"],
+["Αγοράσαμε τέσσερα ______ (εισιτήριο).","εισιτήρια"],
+["Χθες ______ (βρίσκω) ένα καλό εστιατόριο.","βρήκα"],
+["Αύριο ______ (πηγαίνω) στη συναυλία.","θα πάω"]
+];
+
+function buildQuiz(){
+ const box=document.getElementById("quiz");
+ questions.forEach((q,i)=>{
+   const div=document.createElement("div");
+   div.className="task";
+   const label=document.createElement("label");
+   label.textContent=(i+1)+". "+q[0];
+   const input=document.createElement("input");
+   input.type="text";
+   input.className="answer";
+   input.id="a"+i;
+   const feedback=document.createElement("p");
+   feedback.id="f"+i;
+   div.append(label,input,feedback);
+   box.appendChild(div);
+ });
+}
+
+function norm(s){
+ return s.trim().toLocaleLowerCase("el-GR")
+ .normalize("NFD")
+ .replace(/[\u0300-\u036f]/g,"")
+ .replace(/\s+/g," ");
+}
+
+function checkQuiz(){
+ let correct=0;
+ questions.forEach((q,i)=>{
+   const answer=document.getElementById("a"+i).value;
+   const ok=norm(answer)===norm(q[1]);
+   if(ok)correct++;
+   const f=document.getElementById("f"+i);
+   f.textContent=ok?"✓ Σωστά!":"Σωστός τύπος: "+q[1];
+   f.style.color=ok?"#217543":"#a14b23";
+ });
+ document.getElementById("result").textContent=
+ "Αποτέλεσμα: "+correct+" από "+questions.length;
+}
+
+function resetQuiz(){
+ questions.forEach((q,i)=>{
+   document.getElementById("a"+i).value="";
+   document.getElementById("f"+i).textContent="";
+ });
+ document.getElementById("result").textContent="";
+}
+
+choose("concert");
+buildQuiz();
+showPage(0);
+</script>
+</body>
+</html>
